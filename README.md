@@ -23,3 +23,5 @@ Em cada mês: `saldo novo = saldo anterior × (1 + taxa mensal) + aporte`. Para 
 - `tests.js`: testes automatizados sem bibliotecas.
 
 Próximas calculadoras podem reutilizar `math.js` e adicionar páginas ou módulos próprios, sem alterar a interface desta calculadora.
+
+Projeto RENDA MAIS
