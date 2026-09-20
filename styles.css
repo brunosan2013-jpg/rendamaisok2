@@ -186,7 +186,7 @@
 
 .compound-input select {
   width: auto;
-  min-width: 125px;
+  min-width: 150px;
   border-left: 1px solid #eadfe1;
   cursor: pointer;
 }
@@ -287,6 +287,6 @@
   }
 
   .compound-input select {
-    min-width: 105px;
+    min-width: 130px;
   }
 }
