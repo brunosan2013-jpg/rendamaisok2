@@ -190,6 +190,7 @@
   flex: 0 0 180px;
   padding-right: 30px;
   white-space: nowrap;
+  line-height: 1.2;
   border-left: 1px solid #eadfe1;
   cursor: pointer;
 }
