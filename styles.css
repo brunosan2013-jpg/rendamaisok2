@@ -93,3 +93,200 @@
     letter-spacing: -0.055em;
   }
 }
+
+
+
+/* ===== CALCULADORA DE META FINANCEIRA ===== */
+
+.goal-section {
+  max-width: 1200px;
+  margin: 64px auto;
+  padding: 0 24px;
+}
+
+.goal-header {
+  margin-bottom: 28px;
+}
+
+.goal-header .eyebrow,
+.goal-result .eyebrow {
+  margin: 0 0 10px;
+  color: var(--accent, #c51f32);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+}
+
+.goal-header h2 {
+  margin: 0;
+  color: var(--ink, #1d1012);
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.08;
+}
+
+.goal-header p:not(.eyebrow) {
+  max-width: 760px;
+  margin: 14px 0 0;
+  color: var(--muted, #6f6465);
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+.goal-card {
+  padding: clamp(24px, 4vw, 42px);
+  border: 1px solid #eadfe1;
+  border-radius: 18px;
+  background: var(--card, #fff);
+  box-shadow: 0 18px 45px rgba(29, 16, 18, 0.08);
+}
+
+.goal-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.goal-fields label {
+  display: block;
+  color: var(--ink, #1d1012);
+  font-weight: 700;
+}
+
+.currency-input,
+.compound-input {
+  display: flex;
+  align-items: stretch;
+  margin-top: 8px;
+  border: 1px solid #d9cccf;
+  border-radius: 10px;
+  background: #fff;
+  overflow: hidden;
+}
+
+.currency-input span {
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  color: var(--muted, #6f6465);
+  border-right: 1px solid #eadfe1;
+}
+
+.currency-input input,
+.compound-input input,
+.compound-input select {
+  min-width: 0;
+  width: 100%;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  padding: 15px 14px;
+  color: var(--ink, #1d1012);
+  font: inherit;
+}
+
+.compound-input select {
+  width: auto;
+  min-width: 125px;
+  border-left: 1px solid #eadfe1;
+  cursor: pointer;
+}
+
+.currency-input:focus-within,
+.compound-input:focus-within {
+  border-color: var(--accent, #c51f32);
+  box-shadow: 0 0 0 3px rgba(197, 31, 50, 0.08);
+}
+
+.goal-actions {
+  margin-top: 28px;
+}
+
+#calculate-goal {
+  border: 0;
+  border-radius: 9px;
+  padding: 14px 20px;
+  background: var(--accent, #c51f32);
+  color: #fff;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+#calculate-goal span {
+  margin-left: 12px;
+}
+
+#calculate-goal:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+}
+
+.form-message {
+  margin: 12px 0 0;
+  color: var(--accent, #c51f32);
+}
+
+.goal-result {
+  margin-top: 32px;
+  padding-top: 28px;
+  border-top: 1px solid #eadfe1;
+}
+
+.goal-result h3 {
+  margin: 0;
+  color: var(--ink, #1d1012);
+  font-size: clamp(1.35rem, 2.5vw, 2rem);
+  line-height: 1.3;
+}
+
+.goal-result h3 strong {
+  color: var(--accent, #c51f32);
+}
+
+.goal-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.goal-metrics article {
+  padding: 20px;
+  border: 1px solid #eadfe1;
+  border-radius: 12px;
+  background: #fbf8f7;
+}
+
+.goal-metrics span {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--muted, #6f6465);
+  font-size: 0.9rem;
+}
+
+.goal-metrics strong {
+  display: block;
+  color: var(--ink, #1d1012);
+  font-size: 1.2rem;
+}
+
+@media (max-width: 720px) {
+  .goal-section {
+    margin: 42px auto;
+    padding: 0 16px;
+  }
+
+  .goal-fields,
+  .goal-metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .goal-card {
+    padding: 22px 18px;
+  }
+
+  .compound-input select {
+    min-width: 105px;
+  }
+}
