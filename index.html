@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Calcule juros compostos, aportes mensais, patrimônio final e rendimentos do seu investimento.">
+  <meta name="theme-color" content="#c51f32">
+  <title>Calculadora de Juros | RENDA MAIS</title>
+  <link rel="stylesheet" href="styles.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculadora de Juros | RENDA MAIS","applicationCategory":"FinanceApplication","operatingSystem":"Any","description":"Calculadora de juros compostos com aportes mensais."}</script>
+</head>
+<body>
+  <header class="site-header"><a class="brand" href="#top" aria-label="RENDA MAIS, início"><span class="brand-mark" aria-hidden="true">+</span><span>RENDA <b>MAIS.</b></span></a><span class="header-note">Planejamento financeiro, com clareza</span></header>
+  <main id="top">
+    <section class="hero" aria-labelledby="page-title"><p class="eyebrow">PLANEJE COM CONSCIÊNCIA</p><h1 id="page-title">Calculadora de<br><em>Juros</em></h1><p>Entenda como seus aportes e rendimentos podem evoluir ao longo do tempo.</p></section>
+    <section class="calculator-shell" aria-label="Calculadora de investimento">
+      <form id="calculator-form" class="simulation-card" novalidate>
+        <div class="section-heading"><span class="step">01</span><div><h2>Simule seu investimento</h2><p>Preencha os valores para visualizar a projeção.</p></div></div>
+        <div class="fields">
+          <label>Valor inicial <div class="currency-input"><span>R$</span><input id="initial" inputmode="decimal" value="1.000,00" aria-describedby="initial-help"></div><small id="initial-help">Quanto você já tem investido.</small></label>
+          <label>Aporte mensal <div class="currency-input"><span>R$</span><input id="contribution" inputmode="decimal" value="500,00"></div><small>Você pode informar R$ 0,00.</small></label>
+          <label>Rentabilidade <div class="compound-input"><input id="rate" type="number" min="0" max="1000" step="0.01" value="10"><select id="rate-period" aria-label="Periodicidade da rentabilidade"><option value="year">% ao ano</option><option value="month">% ao mês</option></select></div></label>
+          <label>Prazo <div class="compound-input"><input id="term" type="number" min="1" max="1200" step="1" value="10"><select id="term-period" aria-label="Periodicidade do prazo"><option value="year">anos</option><option value="month">meses</option></select></div></label>
+        </div>
+        <p id="form-message" class="form-message" role="alert"></p>
+        <div class="actions"><button type="submit" class="primary">Calcular projeção <span aria-hidden="true">→</span></button><button type="button" id="clear" class="secondary">Limpar</button></div>
+        <p class="equivalence" id="equivalence"></p>
+      </form>
+      <aside class="method-card"><span class="step">02</span><h2>O efeito do tempo</h2><p>Os rendimentos entram no saldo e passam a render também. É a capitalização trabalhando a seu favor.</p><div class="method-line"><span>aporte</span><i></i><span>rendimento</span><i></i><span>crescimento</span></div></aside>
+    </section>
+    <section class="results-section" aria-live="polite" aria-label="Resultado da simulação">
+      <div class="results-intro"><p class="eyebrow">SUA PROJEÇÃO</p><h2>Um olhar para o <em>futuro</em></h2><p id="summary">Considerando aportes no final de cada mês.</p></div>
+      <div class="metrics">
+        <article class="metric featured"><span>Patrimônio final</span><strong id="final-value">R$ 0,00</strong><small id="final-detail">em 0 meses</small></article>
+        <article class="metric"><span>Total investido</span><strong id="invested-value">R$ 0,00</strong><small>capital inicial + aportes</small></article>
+        <article class="metric"><span>Total em rendimentos</span><strong id="earnings-value">R$ 0,00</strong><small>crescimento sobre o investido</small></article>
+        <article class="metric"><span>Rentabilidade acumulada</span><strong id="return-value">0,00%</strong><small>sobre o total investido</small></article>
+      </div>
+      <div class="chart-card"><div class="chart-top"><div><h2>Evolução patrimonial</h2><p>O patrimônio é formado pelos seus aportes e pelos rendimentos acumulados.</p></div><div class="legend"><span><i class="total-key"></i>Patrimônio</span><span><i class="invested-key"></i>Investido</span></div></div><div class="chart-wrap"><canvas id="chart" role="img" aria-label="Gráfico de evolução patrimonial"></canvas></div></div>
+    </section>
+    <section class="withdrawal"><div><p class="eyebrow">PLANEJAMENTO DE RENDA</p><h2>Quanto posso retirar?</h2><p>Estime uma retirada mensal a partir do patrimônio projetado.</p></div><div class="withdraw-control"><label for="withdraw-rate">Taxa anual de retirada</label><div class="percent-field"><input id="withdraw-rate" type="number" value="4" min="0" max="100" step="0.1"><span>% a.a.</span></div></div><div class="withdraw-result"><span>Renda mensal estimada</span><strong id="withdraw-value">R$ 0,00</strong></div><p class="disclaimer">Simulação matemática. Não representa garantia de rentabilidade ou renda futura.</p></section>
+    <section class="table-section"><div class="section-title"><p class="eyebrow">DETALHAMENTO</p><h2>Evolução mês a mês</h2><p>Valores projetados sem desconto de impostos, inflação ou taxas.</p></div><div class="table-scroll"><table><thead><tr><th>Período</th><th>Aporte</th><th>Total aportado</th><th>Rendimentos do período</th><th>Rendimentos acumulados</th><th>Patrimônio</th></tr></thead><tbody id="evolution-table"></tbody></table></div></section>
+    <section class="education" aria-label="Conteúdo educativo"><article><span class="number">01</span><h2>O que são juros compostos?</h2><p>São rendimentos que passam a fazer parte do capital. No período seguinte, você recebe rendimento sobre o valor inicial e sobre o que já rendeu.</p></article><article><span class="number">02</span><h2>Como funciona?</h2><ol><li>Informe o valor inicial e o aporte mensal.</li><li>Defina a rentabilidade e o prazo.</li><li>Calcule para ver a projeção mês a mês.</li></ol></article><article><span class="number">03</span><h2>Por que importam?</h2><p>Tempo, constância e capitalização se combinam para ampliar o efeito dos rendimentos — sem que isso represente promessa de retorno.</p></article></section>
+    <section class="references"><h2>Referências e metodologia</h2><p>Os cálculos usam capitalização composta mensal e consideram aportes ao final de cada mês. A taxa anual é convertida para taxa mensal equivalente pela fórmula <code>(1 + taxa anual)<sup>1/12</sup> − 1</code>.</p><p>Referências conceituais: <a href="https://borainvestir.b3.com.br/glossario/juros-compostos/" target="_blank" rel="noopener">B3 — Bora Investir</a> e <a href="https://www.investor.gov/financial-tools-calculators/calculators/compound-interest-calculator" target="_blank" rel="noopener">Investor.gov</a>.</p></section>
+  </main><footer>© <span id="year"></span> RENDA MAIS. <span>•</span> Ferramenta educativa para planejamento financeiro</footer>
+  <script src="math.js"></script><script src="app.js"></script>
+</body></html>
