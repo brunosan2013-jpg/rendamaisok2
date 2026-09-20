@@ -12,3 +12,115 @@
   function render(){ const v=values(); try{const r=M.calculate(v);$('form-message').textContent=''; updateEquivalence(v);$('final-value').textContent=formatMoney(r.final);$('final-detail').textContent=`em ${r.months} ${r.months===1?'mês':'meses'}`;$('invested-value').textContent=formatMoney(r.invested);$('earnings-value').textContent=formatMoney(r.earnings);$('return-value').textContent=formatPercent(r.returnRate);$('summary').textContent=`Projeção para ${r.months} meses, com aportes ao final de cada mês.`; $('withdraw-value').textContent=formatMoney(r.final*(Number($('withdraw-rate').value)||0)/100/12);renderTable(r.evolution);chart(r.evolution);}catch(e){$('form-message').textContent=e.message;} }
   $('calculator-form').addEventListener('submit',e=>{e.preventDefault();render();});$('clear').addEventListener('click',()=>{$('initial').value='0,00';$('contribution').value='0,00';$('rate').value='';$('term').value='';render();});['initial','contribution'].forEach(id=>$(id).addEventListener('blur',formatInput));inputs.forEach(id=>$(id).addEventListener('change',render));$('withdraw-rate').addEventListener('input',render);window.addEventListener('resize',()=>{try{chart(M.calculate(values()).evolution)}catch{}});$('year').textContent=new Date().getFullYear();render();
 })();
+(() => {
+  const $ = id => document.getElementById(id);
+
+  const formatMoney = value =>
+    new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL'
+    }).format(value);
+
+  const parseMoney = value => {
+    const text = String(value ?? '').trim();
+
+    if (!text) return NaN;
+
+    return Number(
+      text
+        .replace(/\./g, '')
+        .replace(',', '.')
+        .replace(/[^\d.-]/g, '')
+    );
+  };
+
+  const formatInput = element => {
+    if (!element) return;
+
+    const value = parseMoney(element.value);
+
+    if (Number.isFinite(value)) {
+      element.value = new Intl.NumberFormat('pt-BR', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      }).format(value);
+    }
+  };
+
+  const calculateButton = $('calculate-goal');
+
+  if (!calculateButton) return;
+
+  const showMessage = message => {
+    const element = $('goal-message');
+
+    if (element) {
+      element.textContent = message || '';
+    }
+  };
+
+  const calculateGoal = () => {
+    try {
+      showMessage('');
+
+      const initial = parseMoney($('goal-initial').value);
+      const target = parseMoney($('goal-target').value);
+      const rate = Number($('goal-rate').value) / 100;
+      const ratePeriod = $('goal-rate-period').value;
+      const term = Number($('goal-term').value);
+      const termPeriod = $('goal-term-period').value;
+
+      const result =
+        window.CalculatorMath.calculateRequiredContribution(
+          target,
+          initial,
+          rate,
+          term,
+          termPeriod,
+          ratePeriod
+        );
+
+      $('goal-monthly').textContent =
+        formatMoney(result.monthlyContribution);
+
+      $('goal-invested').textContent =
+        formatMoney(result.totalInvested);
+
+      $('goal-earnings').textContent =
+        formatMoney(result.totalEarnings);
+
+      $('goal-final').textContent =
+        formatMoney(result.projectedFinal);
+
+      $('goal-result').classList.add('is-visible');
+
+    } catch (error) {
+      showMessage(
+        error?.message ||
+        'Não foi possível calcular sua meta.'
+      );
+
+      $('goal-result').classList.remove('is-visible');
+    }
+  };
+
+  calculateButton.addEventListener(
+    'click',
+    calculateGoal
+  );
+
+  $('goal-initial')?.addEventListener(
+    'blur',
+    event => formatInput(event.target)
+  );
+
+  $('goal-target')?.addEventListener(
+    'blur',
+    event => formatInput(event.target)
+  );
+
+  formatInput($('goal-initial'));
+  formatInput($('goal-target'));
+
+  calculateGoal();
+})();
