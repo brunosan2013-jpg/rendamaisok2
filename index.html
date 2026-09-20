@@ -28,6 +28,146 @@
       </form>
       <aside class="method-card"><span class="step">02</span><h2>O efeito do tempo</h2><p>Os rendimentos entram no saldo e passam a render também. É a capitalização trabalhando a seu favor.</p><div class="method-line"><span>aporte</span><i></i><span>rendimento</span><i></i><span>crescimento</span></div></aside>
     </section>
+    <section class="goal-section" aria-label="Calculadora de meta financeira">
+  <div class="goal-header">
+    <div>
+      <p class="eyebrow">PLANEJE SUA META</p>
+      <h2>Quanto preciso investir para chegar lá?</h2>
+      <p>
+        Informe seu objetivo e descubra o aporte mensal necessário
+        para alcançar sua meta financeira.
+      </p>
+    </div>
+  </div>
+
+  <div class="goal-card">
+    <div class="goal-fields">
+
+      <label>
+        Quanto você já tem
+        <div class="currency-input">
+          <span>R$</span>
+          <input
+            id="goal-initial"
+            inputmode="decimal"
+            value="0,00"
+            aria-label="Valor inicial para a meta"
+          >
+        </div>
+      </label>
+
+      <label>
+        Meta financeira
+        <div class="currency-input">
+          <span>R$</span>
+          <input
+            id="goal-target"
+            inputmode="decimal"
+            value="1.000.000,00"
+            aria-label="Meta financeira"
+          >
+        </div>
+      </label>
+
+      <label>
+        Rentabilidade
+        <div class="compound-input">
+          <input
+            id="goal-rate"
+            type="number"
+            min="0"
+            max="1000"
+            step="0.01"
+            value="10"
+            aria-label="Rentabilidade da meta"
+          >
+
+          <select
+            id="goal-rate-period"
+            aria-label="Período da rentabilidade"
+          >
+            <option value="year">% ao ano</option>
+            <option value="month">% ao mês</option>
+          </select>
+        </div>
+      </label>
+
+      <label>
+        Prazo
+        <div class="compound-input">
+          <input
+            id="goal-term"
+            type="number"
+            min="1"
+            max="100"
+            step="1"
+            value="20"
+            aria-label="Prazo da meta"
+          >
+
+          <select
+            id="goal-term-period"
+            aria-label="Unidade do prazo"
+          >
+            <option value="year">anos</option>
+            <option value="month">meses</option>
+          </select>
+        </div>
+      </label>
+
+    </div>
+
+    <div class="goal-actions">
+      <button
+        type="button"
+        id="calculate-goal"
+        class="primary"
+      >
+        Calcular aporte necessário
+        <span aria-hidden="true">→</span>
+      </button>
+
+      <p
+        id="goal-message"
+        class="form-message"
+        role="alert"
+      ></p>
+    </div>
+
+    <div
+      id="goal-result"
+      class="goal-result"
+      aria-live="polite"
+    >
+      <p class="eyebrow">SUA META</p>
+
+      <h3>
+        Você precisa investir
+        <strong id="goal-monthly">R$ 0,00</strong>
+        por mês.
+      </h3>
+
+      <div class="goal-metrics">
+
+        <article>
+          <span>Total investido</span>
+          <strong id="goal-invested">R$ 0,00</strong>
+        </article>
+
+        <article>
+          <span>Total em rendimentos</span>
+          <strong id="goal-earnings">R$ 0,00</strong>
+        </article>
+
+        <article>
+          <span>Patrimônio projetado</span>
+          <strong id="goal-final">R$ 0,00</strong>
+        </article>
+
+      </div>
+    </div>
+  </div>
+</section>
     <section class="results-section" aria-live="polite" aria-label="Resultado da simulação">
       <div class="results-intro"><p class="eyebrow">SUA PROJEÇÃO</p><h2>Um olhar para o <em>futuro</em></h2><p id="summary">Considerando aportes no final de cada mês.</p></div>
       <div class="metrics">
